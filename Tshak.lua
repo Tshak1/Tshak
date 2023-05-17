@@ -4112,7 +4112,7 @@ local list = Redis:smembers(Tshak.."Tshak:allM"..msg.chat_id)
 for k,v in pairs(list) do
 local Message = v
 if Message then
-t = "↯︙تم حذف ‹ "..k.." › من الميديا"
+t = "︙تم حذف ‹ "..k.." › من الميديا"
 LuaTele.deleteMessages(msg.chat_id,{[1]= Message})
 Redis:del(Tshak.."Tshak:allM"..msg.chat_id) end end
 if #list == 0 then
