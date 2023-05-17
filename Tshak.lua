@@ -7,7 +7,7 @@
 URL     = require("./libs/url")
 JSON    = require("./libs/dkjson")
 serpent = require("libs/serpent")
-json = require('libs/json')
+json = require('libs/json')يتطلب
 Redis = require('libs/redis').connect('127.0.0.1', 6379)
 http  = require("socket.http")
 https   = require("ssl.https")
@@ -2306,6 +2306,17 @@ UserInfousername = 'لا يوجد'
 end
 return LuaTele.sendText(msg_chat_id,msg_id,'\n↯︙معرفك ⇜ ❨ '..UserInfousername..' ❩',"md",true)  end
 
+if text == "نمله" then
+photo = 'https://t.me/apqiy/110'
+keyboard = {} 
+keyboard.inline_keyboard = {
+{
+{text = '🐜', callback_data=msg.sender_id.user_id.."/nmla"},
+},
+}
+local rep = msg.id/2097152/0.5
+https.request("https://api.telegram.org/bot"..Token.."/sendphoto?chat_id="..msg.chat_id.."&reply_to_message_id="..rep.."&photo="..photo.."&caption="..URL.escape(" إضغط علي النمله 🐜").."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end
 if text == 'انا منو' or text == "منو اني" then
 if not Redis:get(Tshak.."Tshak:Status:IdPhoto"..msg_chat_id) then
 return false
