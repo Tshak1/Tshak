@@ -4122,7 +4122,7 @@ end
 if text == "عدد الميديا" and msg.Cleaner or text == "الميديا" and msg.Cleaner then  
 local gmria = Redis:scard(Tshak.."Tshak:allM"..msg.chat_id)  
 if gmria == 0 then
-LuaTele.sendText(msg_chat_id,msg_id,"*↯︙عدد الميديا ⇜ *‹* "..gmria.." *›","md")
+LuaTele.sendText(msg_chat_id,msg_id,"*︙عدد الميديا ⇜ *‹* "..gmria.." *›","md")
 else
 local reply_markup = LuaTele.replyMarkup{type = 'inline',data = {{{text = '‹ امسح ›', data = msg.sender_id.user_id..'/MsHLaR'},},}}
 return LuaTele.sendText(msg_chat_id,msg_id,"*↯︙عدد الميديا ⇜ *‹* "..gmria.." *›","md",false, false ,false, false, reply_markup) end end
