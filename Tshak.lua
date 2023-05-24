@@ -5582,16 +5582,104 @@ Redis:del(Tshak..'Tshak:'..lock..msg_chat_id)
 end
 LuaTele.sendText(msg_chat_id,msg_id,Reply_Status(msg.sender_id.user_id,"*↯︙تم فتح جميع الاوامر*").unLock,"md",true)  
 return false end
+if text == 'رتبتي' then
+local ban = LuaTele.getUser(msg.sender_id.user_id)
+local news = '● رتبتك هي : '..msg.Name_Controller
+local reply_markup = LuaTele.replyMarkup{type = 'inline',data = {
+{{text =news,url = "https://t.me/"..ban.username..""}, },}}
+return LuaTele.sendText(msg_chat_id, msg_id, news, 'md', false, false, false, false, reply_markup)
+end
+if text == 'معلوماتي' then
+local ban = LuaTele.getUser(msg.sender_id.user_id)
+if ban.first_name then
+news = " "..ban.first_name.." "
+else
+news = " لا يوجد"
+end
+if ban.first_name then
+UserName = ' '..ban.first_name..' '
+else
+UserName = 'لا يوجد'
+end
+if ban.username then
+banusername = '@'..ban.username..''
+else
+banusername = 'لا يوجد'
+end
+local UserId = msg.sender_id.user_id
+local RinkBot = msg.Name_Controller
+local TotalMsg = Redis:get(Tshak..'Num:Message:User'..msg_chat_id..':'..msg.sender_id.user_id) or 0
+local news = '🏷️›ɪᴅ : '..UserId
+local uass = '📇›ɴᴀᴍᴇ : '..UserName
+local banhas = 'ℹ️›ᴜѕᴇ : '..banusername
+local rengk = '⏏️›ѕᴛᴀ : '..RinkBot
+local masha = '💳›ᴍѕɢ : '..TotalMsg
+local BIO = '🌟›ʙɪᴏ : '..(msg.sender_id.user_id)
+local again = 'مرحبا في قائمة معلوماتي 🤍'
+local reply_markup = LuaTele.replyMarkup{type = 'inline',data = {
+{
+{text = uass, url = "https://t.me/"..ban.username..""}, 
+},
+{
+{text = news, data = msg.sender_id.user_id..'/news'}, 
+},
+{
+{text = banhas, data = msg.sender_id.user_id..'/banhas'}, 
+},
+{
+{text = rengk, url = "https://t.me/"..ban.username..""}, 
+},
+{
+{text = masha, url = "https://t.me/"..ban.username..""}, 
+},
+{
+{text = BIO, data = msg.sender_id.user_id..'/BIO'}, 
+},
+}
+}
+return LuaTele.sendText(msg_chat_id, msg_id, again, 'md', false, false, false, false, reply_markup)
+end
+if text == 'انا مين' then
+local ban = LuaTele.getUser(msg.sender_id.user_id)
+if ban.first_name then
+news = " "..ban.first_name.." "
+else
+news = " لا يوجد"
+end
+if ban.first_name then
+UserName = ' '..ban.first_name..' '
+else
+UserName = 'لا يوجد'
+end
+local UseName = ' '..UserName
+local news = 'انت يقلبي 🤍 : '..news
+local reply_markup = LuaTele.replyMarkup{type = 'inline',data = {
+{{text = UseName, url = "https://t.me/"..ban.username..""}, },}}
+return LuaTele.sendText(msg_chat_id, msg_id, news, 'md', false, false, false, false, reply_markup)
+end
+if text == 'رابط الحذف' or text == 'روابط الحذف' or text == 'بوت الحذف' or text == 'بوت حذف' then
+Text =[[
+● Hello pro buttons at the bottom to delete social media accounts .
+]]
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = 'Delete Telegram',url="https://my.telegram.org/auth?to=delete"},{text = 'Delete Bot ',url="https://t.me/LC6BOT"}},
+{{text = 'Delete Instagram',url="https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/"},{text = 'Delete Snapchat',url="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount"}},{{text= '˹??𝙤𝙐𝙧𝘾𝙚 𝙉𝙖𝙎𝙖 .⚡',url="https://t.me/B_O_N_T"}}
+}
+local msg_id = msg.id/2097152/0.5
+https.request("https://api.telegram.org/bot"..Token..'/sendPhoto?chat_id=' .. msg.chat_id .. '&photo=https://t.me/NNAON/474&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end
 if text == "غنيلي" then
 if not Redis:get(Tshak.."Tshak:Status:distraction1"..msg_chat_id) then return LuaTele.sendText(msg_chat_id,msg_id,"↯︙عذراً امر غنيلي معطل","md",true) end 
-Abs = math.random(4,2824); 
-local Text ='↯︙تم اختيار المقطع الصوتي لك'
+Abs = math.random(2,140); 
+local Text ='*↯‍︙تم اختيار اغنيه لك*'
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '‹ مره اخرى ›', callback_data = msg.sender_id.user_id..'/Song'}},{{text='- سورس تشاك .',url="t.me/sourcetshak"}
+keyboard.inline_keyboard = {{{text = '‹ مره اخرى ›', callback_data = msg.sender_id.user_id..'/Song'}},{{text='- سورس تشاك .',url="t.me/Tshaak"}
 }
 }
 local msg_id = msg.id/2097152/0.5
-https.request("https://api.telegram.org/bot"..Token..'/sendVoice?chat_id=' .. msg.chat_id .. '&voice=https://t.me/AudiosDavid/'..Abs..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) end
+https.request("https://api.telegram.org/bot"..Token..'/sendVoice?chat_id=' .. msg.chat_id .. '&voice=https://t.me/TEAMSUL/'..Abs..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
+end
 if text == "متحركه" then
 if not Redis:get(Tshak.."Tshak:Status:distraction2"..msg_chat_id) then return LuaTele.sendText(msg_chat_id,msg_id,"↯︙عذراً امر متحركه معطل","md",true) end 
 Abs = math.random(4,1075); 
